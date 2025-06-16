@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleum: Your AI Usage Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light Gray Background */
+            color: #334155; /* Gray Text */
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Define the Brilliant Blues color palette for consistent styling
+        const colors = {
+            primaryBlue: '#004AAD',
+            brightBlue: '#0079FF',
+            lightBlue: '#B4D4FF',
+            veryLightBlue: '#E0ECF8',
+            white: '#ffffff',
+            grayText: '#334155',
+            lightGrayBg: '#f0f4f8',
+        };
+
+        const PageContent = ({ pageId, title, children }) => (
+            <div id={pageId} className="min-h-screen py-10 px-4 md:px-8 bg-white shadow-lg rounded-lg mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.primaryBlue }}>{title}</h2>
+                {children}
+                <div className="text-center mt-10">
+                    <button
+                        onClick={() => DeleumAIGuideApp.navigateTo('home')}
+                        className="bg-gray-200 text-gray-700 px-6 py-3 rounded-full shadow-md hover:bg-gray-300 transition-all duration-300 flex items-center justify-center mx-auto"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                        Back to Welcome
+                    </button>
+                </div>
+            </div>
+        );
+
+        const HomeContent = ({ navigateTo }) => (
+            <div className="min-h-screen py-10 px-4 md:px-8 bg-white shadow-lg rounded-lg">
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-center leading-tight" style={{ color: colors.primaryBlue }}>
+                    Welcome to the World of AI at Deleum!
+                </h2>
+                <p className="text-lg md:text-xl text-center mb-8" style={{ color: colors.grayText }}>
+                    Your Essential Beginner's Guide
+                </p>
+
+                {/* Introduction */}
+                <section className="mb-12">
+                    <h3 className="text-2xl font-semibold mb-4" style={{ color: colors.brightBlue }}>Introduction: Powering Up Your Work with AI at Deleum!</h3>
+                    <p className="text-md leading-relaxed" style={{ color: colors.grayText }}>
+                        As you embark on your journey with us at Deleum, we're excited to introduce you to the innovative tools and technologies that will empower your work, including Artificial Intelligence (AI). This guide is designed to help you understand what AI tools are, how we use them responsibly and securely at Deleum, and how they can make your daily tasks easier and more efficient.
+                    </p>
+                    <p className="text-md leading-relaxed mt-3" style={{ color: colors.grayText }}>
+                        At Deleum, we're committed to delivering "innovative solutions and services to the oil and gas industry and beyond" (as seen on <a href="https://www.deleum.com/corporate-profile/about-deleum" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Deleum's website</a>). AI is becoming a powerful ally in this mission, helping us analyze complex data, generate reports, and even streamline communication across our core businesses like Oilfield Services, Integrated Offshore Engineering Solutions, and Power & Energy (<a href="https://www.deleum.com/core-businesses" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Deleum's Core Businesses</a>). This policy outlines our internal guidelines for using generative AI tools such as OpenAI's ChatGPT and Google's Gemini, which are powerful language models that can understand and generate human-like text.
+                    </p>
+                    <p className="text-md leading-relaxed mt-3 font-semibold" style={{ color: colors.grayText }}>
+                        Why this guide? Our main goal is to help you use these amazing tools effectively while keeping Deleum's sensitive information safe and secure. Think of this as your compass for navigating the exciting landscape of AI in your professional life at Deleum.
+                    </p>
+                </section>
+
+                {/* Table of Contents */}
+                <section className="mb-12 p-6 rounded-lg shadow-inner" style={{ backgroundColor: colors.lightBlue }}>
+                    <h3 className="text-2xl font-semibold mb-4 text-center" style={{ color: colors.primaryBlue }}>Table of Contents</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            { id: 'chapter1', title: 'Chapter 1: What Exactly Are We Talking About? A Quick Intro to AI Tools' },
+                            { id: 'chapter2', title: 'Chapter 2: Who Can Use AI Tools at Deleum?' },
+                            { id: 'chapter3', title: 'Chapter 3: Playing it Safe: Keeping Deleum\'s Information Secure' },
+                            { id: 'chapter4', title: 'Chapter 4: Learning the Ropes: Training and Support' },
+                            { id: 'chapter5', title: 'Chapter 5: Playing by the Rules: Compliance and What Happens If Not' },
+                            { id: 'chapter6', title: 'Chapter 6: Policy Evolution: Staying Up-to-Date' },
+                            { id: 'chapter7', title: 'Chapter 7: What to Do in an Emergency: Incident Response' },
+                            { id: 'chapter8', title: 'Chapter 8: AI for Personal Use: A Quick Note' },
+                            { id: 'chapter9', title: 'Chapter 9: Making AI Content Accessible and Inclusive' },
+                            { id: 'chapter10', title: 'Chapter 10: AI and Your Great Ideas: Intellectual Property' },
+                            { id: 'chapter11', title: 'Chapter 11: The Ethical Compass: Using AI Responsibly' },
+                            { id: 'chapter12', title: 'Chapter 12: Keeping an Eye on Things: Audit and Monitoring' },
+                            { id: 'chapter13', title: 'Chapter 13: Need an Exception? How to Ask' },
+                            { id: 'chapter14', title: 'Chapter 14: Connecting AI with Other Tools: Third-Party Integration' },
+                            { id: 'chapter15', title: 'Chapter 15: Your Data\'s Journey: Retention and Deletion' },
+                            { id: 'chapter16', title: 'Chapter 16: Plan B: Backup and Disaster Recovery' },
+                            { id: 'chapter17', title: 'Chapter 17: Staying Ahead of Risks: Risk Assessment' },
+                            { id: 'chapter18', title: 'Chapter 18: Who Does What: Roles and Responsibilities' },
+                            { id: 'chapter19', title: 'Chapter 19: Policies You Should Also Know' },
+                        ].map((item) => (
+                            <button
+                                key={item.id}
+                                onClick={() => navigateTo(item.id)}
+                                className="block text-left p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                                style={{ backgroundColor: colors.white, color: colors.primaryBlue }}
+                            >
+                                <span className="font-medium">{item.title}</span>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+
+                {/* FAQ Section */}
+                <section className="mb-12">
+                    <h3 className="text-2xl font-semibold mb-4 text-center" style={{ color: colors.brightBlue }}>Frequently Asked Questions (FAQ)</h3>
+                    <div className="space-y-4">
+                        <details className="p-4 rounded-lg shadow-sm" style={{ backgroundColor: colors.white }}>
+                            <summary className="font-semibold cursor-pointer" style={{ color: colors.primaryBlue }}>What kind of AI tools are covered by this policy?</summary>
+                            <p className="mt-2 text-sm" style={{ color: colors.grayText }}>This policy primarily covers generative AI tools like OpenAI's ChatGPT and Google's Gemini. These are tools that can create new content, such as text, based on your prompts.</p>
+                        </details>
+                        <details className="p-4 rounded-lg shadow-sm" style={{ backgroundColor: colors.white }}>
+                            <summary className="font-semibold cursor-pointer" style={{ color: colors.primaryBlue }}>Can I use AI tools for my daily work tasks?</summary>
+                            <p className="mt-2 text-sm" style={{ color: colors.grayText }}>Yes, you are encouraged to use AI tools for work-related purposes like drafting emails, analyzing data, or generating reports, provided you adhere to the guidelines in this policy, especially regarding data security.</p>
+                        </details>
+                        <details className="p-4 rounded-lg shadow-sm" style={{ backgroundColor: colors.white }}>
+                            <summary className="font-semibold cursor-pointer" style={{ color: colors.primaryBlue }}>What should I never put into an AI tool?</summary>
+                            <p className="mt-2 text-sm" style={{ color: colors.grayText }}>Never input sensitive or confidential Deleum information, including financial data, personal employee/customer information, intellectual property, trade secrets, or strategic plans. Always treat AI tools as public platforms.</p>
+                        </details>
+                        <details className="p-4 rounded-lg shadow-sm" style={{ backgroundColor: colors.white }}>
+                            <summary className="font-semibold cursor-pointer" style={{ color: colors.primaryBlue }}>What if I accidentally disclose sensitive information?</summary>
+                            <p className="mt-2 text-sm" style={{ color: colors.grayText }}>Immediately report the incident to the ICT Department or your superior. Fast reporting is crucial for mitigating potential risks.</p>
+                        </details>
+                        <details className="p-4 rounded-lg shadow-sm" style={{ backgroundColor: colors.white }}>
+                            <summary className="font-semibold cursor-pointer" style={{ color: colors.primaryBlue }}>Is training mandatory for using AI tools?</summary>
+                            <p className="mt-2 text-sm" style={{ color: colors.grayText }}>Yes, all employees who use AI tools for work must receive training on this policy and best practices. The ICT Department provides this training.</p>
+                        </details>
+                    </div>
+                </section>
+            </div>
+        );
+
+        const DeleumAIGuideApp = () => {
+            const [currentPage, setCurrentPage] = useState('home');
+
+            const navigateTo = (page) => {
+                setCurrentPage(page);
+                window.scrollTo(0, 0); // Scroll to top on page change
+            };
+
+            // Expose navigateTo to global scope for PageContent component
+            useEffect(() => {
+                window.DeleumAIGuideApp = { navigateTo };
+                return () => {
+                    delete window.DeleumAIGuideApp;
+                };
+            }, [navigateTo]);
+
+
+            const renderPage = () => {
+                switch (currentPage) {
+                    case 'home':
+                        return <HomeContent navigateTo={navigateTo} />;
+
+                    case 'chapter1':
+                        return (
+                            <PageContent pageId="chapter1" title="Chapter 1: What Exactly Are We Talking About? A Quick Intro to AI Tools">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    When we talk about "AI Tools" in this guide, we're specifically referring to **generative AI tools**. These are computer programs that can create new content, like text, images, or even code, based on the information they've learned from vast datasets. They are designed to understand context and generate human-like responses or creations.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The most common examples you might encounter and use at Deleum are:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **OpenAI's ChatGPT:** A widely recognized tool for generating text, summarizing lengthy documents, brainstorming ideas, drafting communications, and answering a broad range of questions. Its strength lies in its conversational ability.
+                                    </li>
+                                    <li>
+                                        **Google's Gemini:** Similar to ChatGPT, Gemini is Google's advanced multimodal AI model designed to understand and respond to various prompts. It's powerful for information synthesis, content creation, and complex problem-solving.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed" style={{ color: colors.grayText }}>
+                                    Think of these tools as incredibly smart assistants that can augment your capabilities, helping you with tasks that involve language, information processing, and creative generation. They are here to empower you, not replace your critical thinking and expertise.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter2':
+                        return (
+                            <PageContent pageId="chapter2" title="Chapter 2: Who Can Use AI Tools at Deleum?">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    This policy and guide apply to **everyone at Deleum** who accesses and uses AI tools for work-related purposes. Our aim is to ensure that all employees, regardless of their department or role, understand how to leverage these powerful tools responsibly and effectively.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Whether you're involved in our Oilfield Services, Integrated Offshore Engineering Solutions, or Power & Energy sectors, or in a supporting corporate function like Finance, Human Resources, or ICT, if you use AI tools as part of your job, this guide is for you.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Common work-related purposes for AI tool usage include, but are not limited to:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Communication:** Drafting professional emails, summarizing lengthy meeting notes, or preparing concise internal announcements.
+                                        <br /><span className="text-sm italic text-gray-500">Example: Quickly summarizing a complex project update email into bullet points for a team meeting.</span>
+                                    </li>
+                                    <li>
+                                        **Data Analysis:** Assisting with the preliminary analysis of large datasets (e.g., identifying trends in equipment performance data from our oilfield services operations to predict maintenance needs). *Note: This does not involve inputting raw, sensitive data directly into public AI tools.*
+                                    </li>
+                                    <li>
+                                        **Document Generation:** Creating first drafts of internal reports, presentations, proposals for new energy projects, or even boilerplate contract clauses.
+                                        <br /><span className="text-sm italic text-gray-500">Example: Generating an initial outline and key talking points for a presentation on sustainable energy solutions for a client pitch.</span>
+                                    </li>
+                                    <li>
+                                        **Research:** Gathering and synthesizing information on new industry trends, emerging technologies relevant to our integrated solutions, or competitor analysis (using publicly available information).
+                                        <br /><span className="text-sm italic text-gray-500">Example: Researching the latest advancements in renewable energy storage technologies to inform our Power & Energy strategy.</span>
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    You are strongly encouraged to explore how AI can enhance your productivity, creativity, and problem-solving skills, always ensuring your usage adheres to the guidelines outlined in this document.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter3':
+                        return (
+                            <PageContent pageId="chapter3" title="Chapter 3: Playing it Safe: Keeping Deleum's Information Secure">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    This chapter is paramount. While AI tools are incredibly powerful, they are external services. This means we must exercise extreme caution about the information we share with them to prevent any accidental disclosure of Deleum's sensitive or confidential data.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Golden Rule #1: No Secrets Allowed!</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Absolutely NEVER** input, share, or discuss any sensitive or confidential Deleum information with AI tools. Treat these tools as if they are public forums where anything you input could be viewed by others or used to train their models. This includes, but is not limited to:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Financial Data:** Budget figures, revenue reports, detailed pricing strategies for our specialized products and services, or unannounced financial results.
+                                        <br /><span className="text-sm italic text-gray-500">Wrong: Copying a spreadsheet of Q3 sales forecasts into ChatGPT to ask for market insights.</span>
+                                    </li>
+                                    <li>
+                                        **Personal Information:** Any data that identifies an individual, such as employee details, customer contact information, or sensitive vendor data.
+                                        <br /><span className="text-sm italic text-gray-500">Wrong: Inputting a list of employee names and performance review scores to generate summary feedback.</span>
+                                    </li>
+                                    <li>
+                                        **Intellectual Property (IP):** Proprietary designs for our specialized products, innovative engineering solutions, confidential research data, or pending patent applications.
+                                        <br /><span className="text-sm italic text-gray-500">Wrong: Uploading a draft patent description for a new drilling technology to ask for clearer phrasing.</span>
+                                    </li>
+                                    <li>
+                                        **Trade Secrets:** Confidential business processes, unique operational methodologies, or unpublicized technologies that give Deleum a competitive edge.
+                                        <br /><span className="text-sm italic text-gray-500">Wrong: Describing a secret formula or a unique optimization process used in our offshore operations for an AI to explain its mechanics.</span>
+                                    </li>
+                                    <li>
+                                        **Strategic Plans:** Future business initiatives, confidential acquisition targets, unannounced market entry strategies, or long-term growth plans.
+                                        <br /><span className="text-sm italic text-gray-500">Wrong: Asking an AI to summarize a confidential board meeting discussion about a new regional expansion strategy.</span>
+                                    </li>
+                                </ul>
+
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Golden Rule #2: Always Double-Check!</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Before you share *any* content generated by an AI tool, whether internally with colleagues or externally with clients/partners, **always review it carefully**. Make sure it doesn't accidentally contain or hint at any sensitive Deleum information. AI can sometimes "hallucinate" or generate plausible-sounding but incorrect or confidential details.
+                                    <br /><span className="text-sm italic text-gray-500">Example: If an AI tool helps you draft a client email, carefully check that it doesn't accidentally include internal project codes or client-specific financial details that haven't been approved for external sharing.</span>
+                                </p>
+
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Golden Rule #3: Accident? Report it Immediately!</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    If you ever accidentally share sensitive information with an AI tool, **do not panic, but act fast!** Immediately report the incident to the **ICT Department** or your superior. Swift action is crucial for mitigating any potential risks and ensuring data integrity.
+                                </p>
+
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Golden Rule #4: Protect Deleum's Data from AI Training!</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    A crucial step to prevent AI tool providers from using our shared content to further train their models (and potentially expose our data) is to manage your tool settings:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Enable Data Restriction:** Ensure you enable the feature within the AI tool that restricts data usage for model training. This is typically found in the settings or privacy section of the AI tool (e.g., in ChatGPT, look for "Data Controls" or "Chat History & Training" and toggle off data sharing).
+                                    </li>
+                                    <li>
+                                        **Delete Your History:** After each usage session, make it a habit to delete your search or conversation history within the AI tools. This helps keep our interactions private and minimizes the footprint of our data.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    By diligently following these rules, you play a vital role in maintaining Deleum's robust data security posture.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter4':
+                        return (
+                            <PageContent pageId="chapter4" title="Chapter 4: Learning the Ropes: Training and Support">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    We want you to feel confident, capable, and secure when using AI tools. That's why Deleum is committed to providing comprehensive support and training.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Mandatory Training:**
+                                    All employees who intend to use AI tools for work-related purposes **must receive formal training** on this policy and related best practices. This training will cover:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>The scope and intent of the AI Usage Policy.</li>
+                                    <li>Detailed guidelines on data security and confidentiality (Chapter 3).</li>
+                                    <li>Best practices for effective and ethical prompting.</li>
+                                    <li>How to identify and avoid common pitfalls (e.g., AI hallucinations, bias).</li>
+                                    <li>Steps for incident reporting.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Your Go-To Resource: The ICT Department**
+                                    The **ICT Department** is your primary resource for all things related to AI tools at Deleum. They are responsible for:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>Providing the necessary training materials and conducting training sessions.</li>
+                                    <li>Offering ongoing technical support for approved AI tools.</li>
+                                    <li>Answering your questions about policy interpretation and safe usage.</li>
+                                    <li>Assisting with any technical issues or concerns related to AI tools.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Keep an eye on internal communications for announcements regarding upcoming training sessions and available support resources. Your active participation in training is crucial for ensuring a secure and productive AI environment for everyone at Deleum.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter5':
+                        return (
+                            <PageContent pageId="chapter5" title="Chapter 5: Playing by the Rules: Compliance and What Happens If Not">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Adhering to Deleum's AI Usage Policy is not just a recommendation; it's a **mandatory requirement** for all employees. This policy is in place to protect our sensitive information, maintain our operational integrity, and ensure we uphold our ethical standards.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Commitment to Compliance:**
+                                    Every employee is expected to thoroughly understand and strictly comply with all guidelines outlined in this document. Your commitment to compliance directly contributes to the security and success of Deleum as a whole.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Consequences of Non-Compliance:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Violations of this policy are taken seriously and may result in disciplinary action. The severity of the action will depend on the nature and impact of the violation, and could range from formal warnings to, in serious cases, **termination of employment**.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Monitoring and Enforcement:**
+                                    The **ICT Department** is entrusted with the critical responsibility of:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Monitoring Compliance:** Periodically reviewing AI tool usage within Deleum to ensure adherence to policy guidelines. This may involve reviewing usage logs or audit trails where available and permissible.
+                                    </li>
+                                    <li>
+                                        **Investigating Violations:** Thoroughly investigating any reported or detected violations of this policy.
+                                    </li>
+                                    <li>
+                                        **Enforcing Actions:** Recommending and implementing appropriate disciplinary actions in coordination with Human Resources and relevant department heads.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    We believe in transparent expectations and fair enforcement. Your proactive adherence helps maintain a secure and trustworthy environment for everyone at Deleum.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter6':
+                        return (
+                            <PageContent pageId="chapter6" title="Chapter 6: Policy Evolution: Staying Up-to-Date">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The field of Artificial Intelligence is one of the fastest-evolving technological landscapes. New AI tools, capabilities, and best practices emerge constantly. To ensure our policy remains relevant, effective, and protective, it is designed to be a living document.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Periodic Review and Updates:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Deleum's AI Usage Policy is subject to **periodic review and updates**. These reviews will be conducted by the ICT Department in collaboration with other relevant stakeholders (e.g., Legal, HR, Business Units) to assess:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>The latest advancements in AI technology.</li>
+                                    <li>Emerging security risks and vulnerabilities associated with AI tools.</li>
+                                    <li>Feedback from employees regarding the practicality and clarity of the policy.</li>
+                                    <li>Changes in regulatory requirements or industry best practices.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Staying Informed:**
+                                    Any changes or updates to the policy will be communicated to all employees in a timely manner through official Deleum communication channels (e.g., company-wide emails, intranet announcements, or updates to this guide).
+                                </p>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    It is your responsibility to stay informed about the latest version of this policy. By doing so, you ensure your AI usage remains compliant and aligned with Deleum's evolving security and operational standards.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter7':
+                        return (
+                            <PageContent pageId="chapter7" title="Chapter 7: What to Do in an Emergency: Incident Response">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Even with the best precautions, security incidents can sometimes occur. Knowing exactly what to do in the event of an AI tool-related security incident is crucial for minimizing damage and ensuring a swift resolution.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Follow Deleum's Incident Response Plan:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    In the event of an AI Tools related security incident, employees should follow the organization's established incident response plan, which includes these critical steps:
+                                </p>
+                                <ul className="list-decimal list-inside space-y-3 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Report Immediately to ICT:** As soon as you become aware of an incident (e.g., accidental disclosure of sensitive data, suspicious activity within an AI tool, unauthorized access), notify the **ICT Department** without delay. Speed is paramount in incident response.
+                                        <br /><span className="text-sm italic text-gray-500">Example: You realize you accidentally pasted a confidential client list into an AI chat window. Immediately stop, do not delete the chat (unless instructed), and contact ICT.</span>
+                                    </li>
+                                    <li>
+                                        **Assist with the Investigation:** Be prepared to provide all relevant information and cooperate fully with the incident response team. This might include details about when and how the incident occurred, what information was involved, and any other pertinent observations. Your honest and thorough input is invaluable.
+                                        <br /><span className="text-sm italic text-gray-500">Example: You might be asked to provide screenshots, timestamps, or descriptions of your interaction with the AI tool leading up to the incident.</span>
+                                    </li>
+                                    <li>
+                                        **Comply with Remedial Measures:** The incident response team may issue specific instructions or recommendations to contain the incident, recover compromised data, or prevent future occurrences. You must comply with these measures promptly and completely.
+                                        <br /><span className="text-sm italic text-gray-500">Example: You might be asked to change passwords, isolate a device, or cease using a particular AI tool temporarily.</span>
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Your quick and coordinated response is a key factor in protecting Deleum's assets and reputation. When in doubt, always err on the side of caution and report.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter8':
+                        return (
+                            <PageContent pageId="chapter8" title="Chapter 8: AI for Personal Use: A Quick Note">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    While we encourage the professional and work-related use of AI tools, it's important to clarify guidelines around personal use during working hours or on company devices.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Guidance for Personal Use:</h3>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Avoid During Working Hours:** Employees should generally avoid using AI tools for personal purposes during working hours. Your primary focus during work hours should be on your official Deleum duties.
+                                    </li>
+                                    <li>
+                                        **On Company Devices:** If you use AI tools for personal purposes on company-provided devices, such usage should be:
+                                        <ul className="list-circle list-inside ml-5 space-y-1">
+                                            <li>**Limited to Non-Sensitive Topics:** Do not engage in personal discussions or generate content that could be deemed inappropriate, offensive, or controversial.</li>
+                                            <li>**No Company-Related Information:** Crucially, personal use must **never** involve the disclosure or processing of any company-related information, even if it's not strictly "sensitive." This includes project details, client names, internal processes, or any data that could be linked back to Deleum.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The distinction between work and personal use helps ensure that company resources are used appropriately and that our security protocols are not inadvertently bypassed. Remember, any data processed by an AI tool, even for personal use on a company device, might be subject to Deleum's IT policies and monitoring.
+                                </p>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    When in doubt, it is always best to use personal devices and personal accounts for your personal AI tool interactions.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter9':
+                        return (
+                            <PageContent pageId="chapter9" title="Chapter 9: Making AI Content Accessible and Inclusive">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    As a company that values <a href="https://www.deleum.com/careers" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">diversity, equity, and inclusion</a>, it is crucial that any content generated by AI tools adheres to Deleum's guidelines and commitment to these principles. AI models are trained on vast datasets that can reflect existing societal biases, and it's our responsibility to mitigate their perpetuation.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Guidelines for Accessible and Inclusive AI Content:</h3>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Avoiding Biased Language:** Be mindful of language patterns that might reflect biases present in the AI's training data. For instance, avoid gendered pronouns for generic roles, or language that implicitly favors certain demographics.
+                                        <br /><span className="text-sm italic text-gray-500">Example: If using AI to draft job descriptions for our careers portal, ensure the language used is gender-neutral and inclusive, avoiding terms that might inadvertently exclude certain groups (e.g., using "they" instead of "he/she" when referring to a general employee).</span>
+                                    </li>
+                                    <li>
+                                        **Steering Clear of Stereotypes:** Do not use AI to generate content that perpetuates harmful stereotypes based on race, gender, religion, age, disability, or any other protected characteristic.
+                                        <br /><span className="text-sm italic text-gray-500">Example: When creating marketing copy, avoid prompts that could lead to stereotypical depictions of individuals or groups.</span>
+                                    </li>
+                                    <li>
+                                        **No Offensive Content:** Ensure all AI-generated content is respectful, professional, and free from any form of offensive, discriminatory, or derogatory language. Always review content for appropriateness before use.
+                                    </li>
+                                    <li>
+                                        **Clarity and Simplicity:** Strive for clear, concise, and simple language to ensure the content is accessible to a broad audience, including those with varying linguistic proficiencies or cognitive abilities.
+                                    </li>
+                                    <li>
+                                        **Alternative Text/Descriptions:** If AI generates visual content (though less common for our approved tools), remember the importance of providing descriptive alternative text for accessibility.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Your thoughtful review of AI-generated content is vital to ensure that everything produced aligns with Deleum's values and promotes an inclusive environment for all stakeholders.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter10':
+                        return (
+                            <PageContent pageId="chapter10" title="Chapter 10: AI and Your Great Ideas: Intellectual Property">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    When using AI tools, it's essential to understand the implications for intellectual property (IP). The content AI tools generate might be subject to copyright laws, and its use must align with Deleum's intellectual property policies.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Key Considerations for Intellectual Property:</h3>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Attribution of Sources:** Always properly attribute the source of the content you use, especially if it's derived from publicly available information processed by AI. While AI generates new content, it does so based on existing data, and original sources should be acknowledged where appropriate.
+                                        <br /><span className="text-sm italic text-gray-500">Example: If you ask an AI to summarize a published research paper, ensure you cite the original paper in your internal report.</span>
+                                    </li>
+                                    <li>
+                                        **Ownership of AI-Generated Content:** The legal landscape around the ownership of AI-generated content is still evolving. At Deleum, any work product created by an employee in the course of their employment, even with the assistance of AI tools, is generally considered the property of Deleum. However, this does not grant Deleum ownership over the underlying AI model or the data it was trained on.
+                                    </li>
+                                    <li>
+                                        **Proprietary Information Input:** As emphasized in Chapter 3, never input Deleum's confidential intellectual property (e.g., trade secrets, proprietary algorithms, unpatented designs for our specialized products in Oilfield Services or Integrated Offshore Engineering Solutions) into public AI tools. Doing so could lead to the unintended disclosure and loss of Deleum's IP.
+                                    </li>
+                                    <li>
+                                        **When in Doubt, Ask!** If you're unsure about the intellectual property implications of using AI-generated content, especially for external communications, product development, or any scenario where IP rights might be a concern, **consult the Legal Department** for guidance.
+                                        <br /><span className="text-sm italic text-gray-500">Example: If an AI assists you in developing a new technical specification for a component in our Power & Energy solutions, and you believe it might be novel and patentable, consult Legal before proceeding.</span>
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Your diligence in respecting intellectual property rights—both Deleum's and others'—is crucial for maintaining our legal standing and reputation as an innovative leader.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter11':
+                        return (
+                            <PageContent pageId="chapter11" title="Chapter 11: The Ethical Compass: Using AI Responsibly">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Beyond legal and security considerations, using AI tools ethically and responsibly is paramount. Your actions reflect on Deleum's integrity and adherence to its Code of Conduct. We must ensure that AI is a force for good and aligns with our company values.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Core Ethical Principles:</h3>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Accuracy and Truthfulness:** You must never use AI to generate or disseminate false, misleading, or intentionally inaccurate information. This includes creating fake news, fabricated reports, or deceptive marketing claims. Always verify AI-generated facts against reliable sources before using them.
+                                        <br /><span className="text-sm italic text-gray-500">Example: Do not use AI to create a misleading report about a competitor's performance or to inflate Deleum's project statistics.</span>
+                                    </li>
+                                    <li>
+                                        **No Harm or Malice:** AI tools must not be used for purposes that may harm others, directly or indirectly. This includes, but is not limited to:
+                                        <ul className="list-circle list-inside ml-5 space-y-1">
+                                            <li>**Harassment or Bullying:** Generating derogatory, intimidating, or offensive messages.</li>
+                                            <li>**Discrimination:** Creating content that promotes bias or prejudice against any group or individual.</li>
+                                            <li>**Malicious Code:** Using AI to generate harmful code or assist in cyberattacks.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        **Respect for Privacy:** While Chapter 3 covers data security, ethical use also demands respect for individuals' privacy. Do not attempt to use AI tools to infer or exploit personal data beyond its intended and lawful use.
+                                    </li>
+                                    <li>
+                                        **Fairness and Transparency:** Be aware that AI models can sometimes exhibit bias. Review AI outputs critically for any signs of unfairness or unintended discrimination. Where AI is used to make decisions that impact individuals (e.g., recruitment), ensure human oversight and transparency in the process.
+                                    </li>
+                                    <li>
+                                        **Legal and Policy Compliance:** Ensure all AI usage complies with Deleum's Code of Conduct, all applicable laws and regulations, and any other relevant internal policies. Any activities that may be considered unethical or illegal are strictly prohibited.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Your adherence to these ethical principles ensures that AI tools are used constructively and responsibly, reflecting Deleum's commitment to integrity in all its operations.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter12':
+                        return (
+                            <PageContent pageId="chapter12" title="Chapter 12: Keeping an Eye on Things: Audit and Monitoring">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    To ensure compliance with this AI Usage Policy and to continuously improve our guidelines, Deleum maintains a robust system of audit and monitoring. This proactive approach helps us identify potential risks, detect policy violations, and adapt to the evolving landscape of AI.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>How We Monitor AI Tool Usage:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The **ICT Department**, in collaboration with other relevant departments (such as Internal Audit, Legal, and Business Unit heads), conducts periodic audits and monitoring of AI tool usage within Deleum. This may involve:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Review of System Logs:** Where feasible and permissible, system logs from company networks or approved AI tool integrations may be reviewed to identify unusual patterns or potential policy breaches.
+                                    </li>
+                                    <li>
+                                        **Random Audits:** Periodic checks of compliance with policy directives, potentially including reviews of how AI tools are being used by individuals or teams.
+                                    </li>
+                                    <li>
+                                        **Feedback and Reporting:** Utilizing employee reports of potential policy violations or security incidents (as outlined in Chapter 7) as key indicators for investigation.
+                                    </li>
+                                    <li>
+                                        **Policy Effectiveness Assessment:** Analyzing audit findings to assess the overall effectiveness of the AI Usage Policy and to identify areas requiring clarification, stricter controls, or additional training.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Purpose of Monitoring:**
+                                    The primary purpose of these audits and monitoring activities is to:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>Ensure consistent compliance across the organization.</li>
+                                    <li>Protect Deleum's sensitive data and intellectual property.</li>
+                                    <li>Mitigate security risks associated with AI tool usage.</li>
+                                    <li>Identify opportunities for optimizing safe and responsible AI integration.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Rest assured that all monitoring activities are conducted in accordance with Deleum's privacy policies and relevant legal frameworks. Your cooperation with any audit requests is essential for maintaining a secure and compliant environment.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter13':
+                        return (
+                            <PageContent pageId="chapter13" title="Chapter 13: Need an Exception? How to Ask">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    While this policy provides clear guidelines for the vast majority of AI tool usage scenarios, we understand that unique circumstances may occasionally arise where an exception to a specific guideline is genuinely necessary for business operations.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Process for Requesting an Exception:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Any exceptions to this policy must be formally approved by the **ICT Department**. The process ensures that any deviation from the standard guidelines is thoroughly vetted for potential risks and business justification.
+                                </p>
+                                <ol className="list-decimal list-inside space-y-3 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Submit in Writing:** All requests for exceptions must be submitted in writing. This ensures a clear record of the request, its rationale, and the associated risks. Your request should be detailed and comprehensive.
+                                        <br /><span className="text-sm italic text-gray-500">Example: An email to the ICT Department or a formal memo, as specified by internal ICT procedures.</span>
+                                    </li>
+                                    <li>
+                                        **Detail the Reasons:** Clearly articulate the specific business reasons why an exception is required. Explain why standard procedures cannot be followed and how the exception will benefit Deleum's objectives (e.g., critical project timeline, unique data processing requirement).
+                                    </li>
+                                    <li>
+                                        **Outline Potential Risks:** Crucially, you must identify and detail the potential risks associated with granting the exception. This demonstrates your understanding of the policy and helps the ICT Department evaluate the request thoroughly. Propose any mitigating controls you believe can be implemented.
+                                        <br /><span className="text-sm italic text-gray-500">Example: If you need to use an AI tool for a specific type of data that is usually restricted, explain the necessity and what safeguards you propose to put in place (e.g., anonymization, strict access controls, limited duration of use).</span>
+                                    </li>
+                                    <li>
+                                        **Await Approval:** Do NOT proceed with the activity requiring the exception until you receive explicit written approval from the ICT Department.
+                                    </li>
+                                </ol>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The ICT Department will review each request on a case-by-case basis, considering the business need against the potential security and compliance risks. Their decision will be communicated to you in writing.
+                                </p>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Requesting an exception is a formal process designed to protect Deleum. Unapproved deviations from this policy will be considered violations and subject to disciplinary action.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter14':
+                        return (
+                            <PageContent pageId="chapter14" title="Chapter 14: Connecting AI with Other Tools: Third-Party Integration">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    In today's interconnected digital environment, AI tools may offer functionalities that involve integration with other third-party applications, software, or platforms (e.g., linking an AI assistant to your project management software, or using an AI plugin). This chapter outlines the necessary precautions for such integrations.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Exercise Extreme Caution:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    You must exercise extreme caution when considering or implementing any integration of AI tools with third-party applications, tools, or platforms. Such integrations can introduce new security vulnerabilities and data transfer risks if not properly managed.
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Compliance is Key:** Ensure that any proposed integration **fully complies** with Deleum's existing ICT Policy and Cyber Security Policy. These foundational policies govern how all technology and data are handled within the company.
+                                    </li>
+                                    <li>
+                                        **Legal and Regulatory Adherence:** The integration must also comply with any applicable laws and regulations concerning data privacy, data residency, and industry-specific compliance requirements.
+                                    </li>
+                                    <li>
+                                        **Data Flow Assessment:** Understand precisely what data will be shared between the AI tool and the third-party application, how it will be processed, and where it will be stored.
+                                    </li>
+                                </ul>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Mandatory Consultation with ICT Department:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **You must consult with the ICT Department before implementing any third-party integration involving AI tools.** This is not optional. The ICT Department's expertise is vital to:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Assess Potential Risks:** They will evaluate the integration for potential security risks, data leakage points, and compatibility issues.
+                                    </li>
+                                    <li>
+                                        **Validate Security Measures:** The ICT Department will help ensure that the third-party application has adequate security measures in place to protect Deleum's data.
+                                    </li>
+                                    <li>
+                                        **Approve Integration:** They will provide official approval (or denial) for the integration based on their assessment.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Unauthorized third-party integrations pose significant risks to Deleum's data security and operational integrity. Always seek ICT approval first.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter15':
+                        return (
+                            <PageContent pageId="chapter15" title="Chapter 15: Your Data's Journey: Retention and Deletion">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Managing data throughout its lifecycle, from creation to deletion, is a critical aspect of Deleum's information governance. This applies equally to data generated through AI tool usage.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Adherence to Data Retention Policies:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    All data generated through AI tools, including both your inputs (prompts) and the AI's outputs (responses), must strictly adhere to Deleum's overarching **Record Retention Period and Disposal Policy**. This policy dictates how long various types of company data must be kept and how they should be securely disposed of.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Your responsibilities include ensuring that any content generated by AI tools is:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Properly Stored:** If AI-generated content is intended for official use or needs to be retained, it must be saved in designated Deleum systems (e.g., shared drives, document management systems) according to standard company procedures. Do not rely solely on the AI tool's internal chat history for official record-keeping.
+                                    </li>
+                                    <li>
+                                        **Archived:** For content requiring long-term preservation, ensure it is correctly archived as per the Record Retention Policy.
+                                    </li>
+                                    <li>
+                                        **Deleted:** Once the retention period for specific AI-generated content (or the data it derived from) has expired, or if it is no longer needed and does not fall under any retention requirements, it must be securely deleted. This includes deleting chat histories within AI tools as outlined in Chapter 3.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Why is this important?**
+                                    Proper data retention and deletion practices are vital for:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>Ensuring legal and regulatory compliance.</li>
+                                    <li>Reducing data storage costs.</li>
+                                    <li>Minimizing the risk of data breaches.</li>
+                                    <li>Maintaining data accuracy and relevance.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    Familiarize yourself with Deleum's Record Retention Period and Disposal Policy to understand the specific requirements for different types of data you might handle with AI tools.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter16':
+                        return (
+                            <PageContent pageId="chapter16" title="Chapter 16: Plan B: Backup and Disaster Recovery">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    While we strive for seamless operations, it's essential to have robust plans in place for unforeseen circumstances. This chapter addresses backup and disaster recovery specifically as it pertains to data and systems involving AI tool usage.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Your Role in Recovery:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    In the unlikely event of a system failure or data loss involving AI tools, or any data generated or processed by them, employees should follow Deleum's established **backup and disaster recovery procedures** to restore normal operations as quickly and efficiently as possible.
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Be Prepared:** Understand where critical AI-generated outputs (if saved locally or in company systems) are stored and how they are backed up.
+                                    </li>
+                                    <li>
+                                        **Cooperate with Recovery Efforts:** If an incident occurs, you may be asked to provide information or take specific steps to assist the ICT Department in recovery efforts. Your prompt cooperation is vital.
+                                    </li>
+                                    <li>
+                                        **Data Integrity:** If you notice any anomalies or data inconsistencies following a system disruption, report them immediately to the ICT Department.
+                                    </li>
+                                </ul>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>ICT Department's Responsibility:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The **ICT Department** bears the primary responsibility for ensuring that appropriate backup and recovery mechanisms are in place and regularly tested for all critical systems, including those that interact with or store data from AI tool usage. This includes:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>Implementing robust backup solutions for company data repositories.</li>
+                                    <li>Developing and maintaining comprehensive disaster recovery plans.</li>
+                                    <li>Conducting regular tests of backup and recovery procedures to ensure their effectiveness.</li>
+                                    <li>Providing support and guidance during actual recovery operations.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    While ICT manages the infrastructure, your adherence to data storage guidelines (Chapter 15) and prompt reporting of incidents (Chapter 7) form crucial components of Deleum's overall resilience strategy.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter17':
+                        return (
+                            <PageContent pageId="chapter17" title="Chapter 17: Staying Ahead of Risks: Risk Assessment">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    In a rapidly evolving technological landscape like AI, proactive risk management is not just good practice; it's essential. Deleum is committed to continuously assessing and mitigating the risks associated with AI tool usage.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Our Approach to Risk Assessment:</h3>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    The organization must conduct **periodic risk assessments** specifically for AI Tools usage. These assessments involve a systematic evaluation of:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **Potential Vulnerabilities:** Identifying weaknesses in our processes, systems, or employee understanding that could be exploited through AI tool usage.
+                                    </li>
+                                    <li>
+                                        **Threats:** Recognizing external (e.g., new cyber threats targeting AI, malicious AI models) and internal (e.g., unintentional misuse, insider threats) dangers.
+                                    </li>
+                                    <li>
+                                        **Impacts on Deleum:** Analyzing the potential consequences of these risks on Deleum's operations, financial stability, reputation, and compliance obligations. This includes impacts on our core businesses like Oilfield Services, Integrated Offshore Engineering Solutions, and Power & Energy.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    **Implementing Controls:**
+                                    Based on the findings of these risk assessments, Deleum will implement appropriate security measures and controls to mitigate identified risks. These measures may include:
+                                </p>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>Updates to this policy or related policies.</li>
+                                    <li>Enhanced technical safeguards and monitoring tools.</li>
+                                    <li>Additional training programs and awareness campaigns for employees.</li>
+                                    <li>Changes to approved AI tools or their configurations.</li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    This continuous cycle of assessment and mitigation ensures the secure and responsible use of AI tools across Deleum, protecting our assets and our future. Your feedback and vigilance as an employee contribute valuable insights to this ongoing process.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter18':
+                        return (
+                            <PageContent pageId="chapter18" title="Chapter 18: Who Does What: Roles and Responsibilities">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    An effective policy relies on clear accountability. This chapter outlines the specific roles and responsibilities related to the implementation, enforcement, and adherence of Deleum's AI Usage Policy. Everyone at Deleum plays a crucial part in ensuring a secure and productive AI environment.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Key Roles and Their Responsibilities:</h3>
+                                <ul className="list-disc list-inside space-y-2 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **The ICT Department:**
+                                        <br />The ICT Department serves as the central authority for this policy. Their responsibilities include:
+                                        <ul className="list-circle list-inside ml-5 space-y-1">
+                                            <li>Overseeing the overall implementation and enforcement of the policy.</li>
+                                            <li>Providing mandatory training and ongoing support for AI tool usage.</li>
+                                            <li>Monitoring compliance and investigating any reported violations.</li>
+                                            <li>Managing and reviewing the policy periodically.</li>
+                                            <li>Assessing and approving third-party AI tool integrations and exceptions.</li>
+                                            <li>Ensuring backup and disaster recovery mechanisms are in place.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        **Business and Department Heads:**
+                                        <br />Your immediate leaders play a vital role in cascading this policy. Their responsibilities include:
+                                        <ul className="list-circle list-inside ml-5 space-y-1">
+                                            <li>Ensuring that all employees within their respective departments are fully aware of this policy and its guidelines.</li>
+                                            <li>Promoting and enforcing compliance within their teams.</li>
+                                            <li>Supporting employee participation in relevant training programs.</li>
+                                            <li>Addressing initial queries or concerns related to AI usage within their domain.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        **You, the Employee:**
+                                        <br />Every individual employee is a frontline defender of Deleum's data and integrity. Your responsibilities include:
+                                        <ul className="list-circle list-inside ml-5 space-y-1">
+                                            <li>**Adhering strictly** to this AI Usage Policy and its guidelines at all times.</li>
+                                            <li>**Participating actively** in all relevant training sessions to enhance your understanding and skills.</li>
+                                            <li>**Reporting any policy violations or security incidents** immediately to the ICT Department or your superior.</li>
+                                            <li>Exercising caution, critical thinking, and ethical judgment when using AI tools.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    By understanding and fulfilling your specific role, you contribute significantly to Deleum's secure, responsible, and innovative use of AI.
+                                </p>
+                            </PageContent>
+                        );
+                    case 'chapter19':
+                        return (
+                            <PageContent pageId="chapter19" title="Chapter 19: Policies You Should Also Know">
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Deleum's AI Usage Policy is an integral part of our broader framework for information security, data governance, and ethical conduct. It does not stand alone but is designed to complement and be read in conjunction with other critical Deleum policies and procedures.
+                                </p>
+                                <p className="text-md leading-relaxed mb-4" style={{ color: colors.grayText }}>
+                                    Familiarizing yourself with these related policies will provide you with a comprehensive understanding of Deleum's approach to technology, data, and employee conduct.
+                                </p>
+                                <h3 className="text-xl font-semibold mb-3" style={{ color: colors.brightBlue }}>Key Related Policies and Procedures:</h3>
+                                <ul className="list-disc list-inside space-y-3 text-md mb-6" style={{ color: colors.grayText }}>
+                                    <li>
+                                        **ICT Policy:** This overarching policy governs the acceptable use of Deleum's information and communication technology resources. It sets the foundational rules for network access, software usage, and IT asset management, which are all relevant to how you interact with AI tools.
+                                    </li>
+                                    <li>
+                                        **Cyber Security Policy:** This policy details Deleum's commitment and measures to protect its information assets from cyber threats. It covers aspects like secure system configurations, data protection, incident handling, and user responsibilities in maintaining cybersecurity, all of which directly impact AI tool usage.
+                                    </li>
+                                    <li>
+                                        **Record Retention Period and Disposal Policy:** As highlighted in Chapter 15, this policy dictates how long various types of company records must be kept and the procedures for their secure disposal. This is crucial for managing AI-generated outputs and inputs.
+                                    </li>
+                                    <li>
+                                        **Personal Data Policy:** This policy outlines how Deleum collects, processes, stores, and protects personal data in compliance with relevant data protection laws. Understanding this policy is vital to ensure you never input personal or sensitive personal data into AI tools in violation of privacy principles.
+                                    </li>
+                                    <li>
+                                        **Code of Conduct / Ethics Policy:** While not explicitly listed in the original document, it's implied that all employee actions, including AI usage, must align with Deleum's overarching ethical guidelines. This policy covers integrity, professionalism, and responsible behavior.
+                                    </li>
+                                </ul>
+                                <p className="text-md leading-relaxed font-semibold" style={{ color: colors.grayText }}>
+                                    By understanding the interconnectedness of these policies, you enhance your ability to make responsible and informed decisions when utilizing AI tools in your daily work at Deleum.
+                                </p>
+                            </PageContent>
+                        );
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div className="min-h-screen" style={{ backgroundColor: colors.lightGrayBg, color: colors.grayText, fontFamily: 'Inter, sans-serif' }}>
+                    <header className="py-6 shadow-md" style={{ backgroundColor: colors.primaryBlue }}>
+                        <div className="container mx-auto px-4 md:px-8 flex flex-col sm:flex-row items-center justify-between">
+                            <h1 className="text-2xl font-bold text-white mb-2 sm:mb-0">Deleum AI Guide</h1>
+                            <button
+                                onClick={() => navigateTo('home')}
+                                className="bg-white text-gray-700 px-5 py-2 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300"
+                            >
+                                Home
+                            </button>
+                        </div>
+                    </header>
+
+                    <main className="container mx-auto mt-8">
+                        {renderPage()}
+                    </main>
+
+                    <footer className="py-6 text-center text-sm" style={{ backgroundColor: colors.primaryBlue, color: colors.white }}>
+                        <p>&copy; 2025 Deleum Berhad. All rights reserved.</p>
+                        <p>Always refer to the full Deleum Usage on AI Tools Policy (DSSB-ICT-01) for complete details.</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<DeleumAIGuideApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>

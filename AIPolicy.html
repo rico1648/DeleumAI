@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleum: AI Usage Insights & Policy Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 350px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .text-main-title { color: #004AAD; }
+        .text-accent { color: #0079FF; }
+        .bg-primary { background-color: #004AAD; }
+        .bg-accent { background-color: #B4D4FF; }
+
+        .flow-arrow {
+            position: relative;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background-color: #0079FF;
+        }
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #0079FF;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-main-title tracking-tight">AI at Deleum</h1>
+            <p class="text-xl md:text-2xl mt-2 text-slate-600">An Infographic on Our Usage Policy & Best Practices</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <div class="lg:col-span-4 card p-8">
+                <h2 class="text-2xl font-bold text-main-title mb-4">Introduction: The AI Opportunity</h2>
+                <p class="text-slate-600">As Deleum pioneers innovative solutions in the oil and gas industry, we are embracing Generative AI tools like ChatGPT and Google Gemini to enhance productivity and drive innovation. This infographic visualizes our approach, turning policy into a practical guide for every employee. Our goal is to empower you to leverage these tools effectively while rigorously protecting our company's valuable information and intellectual property.</p>
+            </div>
+
+            <div class="lg:col-span-2 card p-6">
+                 <h3 class="text-xl font-bold text-main-title mb-2">Projected Productivity Gains by Task</h3>
+                 <p class="text-sm text-slate-500 mb-4">Authorized use of AI tools is expected to significantly boost efficiency across key workstreams. This chart illustrates the potential time savings and productivity improvements.</p>
+                <div class="chart-container h-80">
+                    <canvas id="productivityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 card p-6">
+                <h3 class="text-xl font-bold text-main-title mb-2">Hypothetical AI Usage Across Core Businesses</h3>
+                <p class="text-sm text-slate-500 mb-4">AI adoption will vary, supporting the unique needs of each business segment. This shows a potential distribution of AI tool utilization.</p>
+                <div class="chart-container h-80">
+                    <canvas id="usageDoughnutChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 card p-8">
+                <h2 class="text-2xl font-bold text-main-title text-center mb-6">The Golden Rules of Data Security</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <h4 class="text-lg font-bold text-red-800 flex items-center"><span class="text-2xl mr-3">🚫</span> No Sensitive Information</h4>
+                        <p class="text-red-700 mt-2 text-sm">Never input financial data, personal details, intellectual property, trade secrets, or strategic plans into AI tools.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                        <h4 class="text-lg font-bold text-green-800 flex items-center"><span class="text-2xl mr-3">✅</span> Double-Check Generated Content</h4>
+                        <p class="text-green-700 mt-2 text-sm">Always review AI output to ensure it does not contain or imply confidential data before sharing.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                        <h4 class="text-lg font-bold text-green-800 flex items-center"><span class="text-2xl mr-3">✅</span> Restrict Data & Delete History</h4>
+                        <p class="text-green-700 mt-2 text-sm">Enable privacy settings to prevent AI models from training on your data, and delete your conversation history after use.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 card p-8">
+                <h2 class="text-2xl font-bold text-main-title text-center mb-6">SWOT Analysis of Deleum's AI Policy</h2>
+                <p class="text-center text-slate-500 mb-6 max-w-3xl mx-auto">A strategic overview of our AI governance framework, highlighting its internal strengths and weaknesses, alongside external opportunities and threats.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-green-800 mb-2">Strengths</h3>
+                        <ul class="list-disc list-inside text-green-700 space-y-1">
+                            <li>Clear security guidelines</li>
+                            <li>Mandatory employee training</li>
+                            <li>Strong incident response plan</li>
+                            <li>Emphasis on ethical use</li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-yellow-800 mb-2">Weaknesses</h3>
+                        <ul class="list-disc list-inside text-yellow-700 space-y-1">
+                            <li>Potential to limit productivity</li>
+                            <li>Relies on manual compliance</li>
+                            <li>Heavy dependency on ICT</li>
+                            <li>Vague on new tool approval</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-2">Opportunities</h3>
+                        <ul class="list-disc list-inside text-blue-700 space-y-1">
+                            <li>Boost innovation & efficiency</li>
+                            <li>Strengthen data governance</li>
+                            <li>Gain competitive advantage</li>
+                            <li>Develop AI-literate workforce</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-red-800 mb-2">Threats</h3>
+                        <ul class="list-disc list-inside text-red-700 space-y-1">
+                            <li>Accidental data disclosure</li>
+                            <li>Rapidly evolving AI landscape</li>
+                            <li>Risk of non-compliance</li>
+                            <li>Sophisticated cyber threats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2 card p-6">
+                <h3 class="text-xl font-bold text-main-title mb-4 text-center">Incident Response Flow</h3>
+                <div class="flex flex-col items-center">
+                    <div class="w-full max-w-xs text-center p-4 bg-accent rounded-lg shadow">
+                        <p class="font-bold text-main-title">1. Security Incident Occurs</p>
+                        <p class="text-xs text-slate-700">e.g., Accidental data exposure</p>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div class="w-full max-w-xs text-center p-4 bg-accent rounded-lg shadow">
+                        <p class="font-bold text-main-title">2. Report to ICT Immediately</p>
+                        <p class="text-xs text-slate-700">Fast reporting is critical</p>
+                    </div>
+                     <div class="flow-arrow"></div>
+                    <div class="w-full max-w-xs text-center p-4 bg-accent rounded-lg shadow">
+                        <p class="font-bold text-main-title">3. Cooperate with Investigation</p>
+                        <p class="text-xs text-slate-700">Provide all relevant information</p>
+                    </div>
+                     <div class="flow-arrow"></div>
+                    <div class="w-full max-w-xs text-center p-4 bg-accent rounded-lg shadow">
+                        <p class="font-bold text-main-title">4. Comply with Remediation</p>
+                        <p class="text-xs text-slate-700">Follow instructions from the team</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2 card p-6">
+                <h3 class="text-xl font-bold text-main-title mb-4">Roles & Responsibilities</h3>
+                 <p class="text-sm text-slate-500 mb-4">A clear division of responsibility ensures our policy is effective. Everyone at Deleum plays a part in the secure use of AI.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100 text-slate-600 uppercase">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Role</th>
+                                <th scope="col" class="px-4 py-3">Key Responsibility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap">You, The Employee</th>
+                                <td class="px-4 py-3">Adhere to policy, attend training, report incidents.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap">Department Heads</th>
+                                <td class="px-4 py-3">Ensure team awareness and compliance.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap">ICT Department</th>
+                                <td class="px-4 py-3">Oversee, enforce, train, and manage the policy.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+        
+        <footer class="text-center mt-12 py-6 border-t border-slate-200">
+            <p class="text-slate-500 text-sm">This infographic is a visual summary of Deleum's Usage on AI Tools Policy (DSSB-ICT-01). Always refer to the full document for complete details.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#334155';
+            const GRID_COLOR = '#e2e8f0';
+            const PRIMARY_BLUE = '#004AAD';
+            const BRIGHT_BLUE = '#0079FF';
+            const LIGHT_BLUE = '#B4D4FF';
+            const SECONDARY_COLOR = '#F59E0B'; 
+
+            function wrapLabel(str, max_width) {
+                if (typeof str !== 'string' || str.length <= max_width) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let current_line = '';
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    const width = current_line.length > 0 ? current_line.length + 1 + word.length : word.length;
+                    if (width > max_width) {
+                        lines.push(current_line);
+                        current_line = word;
+                    } else {
+                        current_line = current_line.length > 0 ? current_line + ' ' + word : word;
+                    }
+                }
+                lines.push(current_line);
+                return lines;
+            }
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            
+            const sharedChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 12 },
+                        padding: 10,
+                        cornerRadius: 4
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: FONT_COLOR, font: { size: 12 } },
+                        grid: { color: GRID_COLOR }
+                    },
+                    y: {
+                        ticks: { color: FONT_COLOR, font: { size: 12 } },
+                        grid: { color: GRID_COLOR }
+                    }
+                }
+            };
+            
+            const productivityCtx = document.getElementById('productivityChart').getContext('2d');
+            new Chart(productivityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Communication', 'Data Analysis', 'Document Generation', 'Research'],
+                    datasets: [{
+                        label: 'Projected Productivity Gain (%)',
+                        data: [25, 35, 45, 30],
+                        backgroundColor: [LIGHT_BLUE, BRIGHT_BLUE, PRIMARY_BLUE, SECONDARY_COLOR],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    ...sharedChartOptions,
+                    plugins: { ...sharedChartOptions.plugins, legend: { display: false } },
+                    scales: { ...sharedChartOptions.scales, y: { ...sharedChartOptions.scales.y, beginAtZero: true, max: 50 } }
+                }
+            });
+
+            const usageDoughnutCtx = document.getElementById('usageDoughnutChart').getContext('2d');
+            new Chart(usageDoughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Oilfield Services', 'Integrated Offshore', 'Power & Energy', 'Corporate & Other'],
+                    datasets: [{
+                        label: 'Usage Distribution',
+                        data: [40, 25, 20, 15],
+                        backgroundColor: [PRIMARY_BLUE, BRIGHT_BLUE, LIGHT_BLUE, SECONDARY_COLOR],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: FONT_COLOR,
+                                font: { size: 12 },
+                                padding: 15
+                            }
+                        },
+                        tooltip: sharedChartOptions.plugins.tooltip
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
